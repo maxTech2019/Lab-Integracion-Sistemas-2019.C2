@@ -1,0 +1,21 @@
+CREATE PROCEDURE agregarPersona
+@Id INT,
+@Nombre NVARCHAR(50),
+@FecNac DATETIME,
+@Activo bit
+AS
+IF NOT EXISTS (SELECT * FROM Personas WHERE PersId = @Id)
+BEGIN
+       INSERT INTO Personas
+       VALUES (@Nombre,@FecNac,@Activo)
+END
+ELSE
+BEGIN
+       UPDATE Personas SET
+       PersNombre = @Nombre,
+       PersFecNacimiento = @FecNac,
+       PersActivo = @Activo
+       WHERE PersId = @Id
+END
+---->
+EXEC agregarPersona @Id = 1, @Nombre = 'Thom', @FecNac = '1997-06-16' @Activo = 1

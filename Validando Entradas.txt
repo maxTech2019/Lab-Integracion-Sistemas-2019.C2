@@ -1,0 +1,55 @@
+if (txtCodigo.Text == "")
+{
+  errorProvider1.SetError(txtCodigo, "Debe sumistre un código al registro");
+  txtCodigo.Focus();
+  return;
+}
+errorProvider1.SetError(txtCodigo, "");
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Duplicados ID
+if (Existe(txtCodigo.Text))
+{
+  errorProvider1.SetError(txtCodigo, "Ya existe ese código registro");
+  txtCodigo.Focus();
+  return;
+}
+errorProvider1.SetError(txtCodigo, "");
+
+private bool Existe(string ID)
+{
+  foreach (Persona Individual in Personas)
+  {
+    if (Individual.Codigo == ID)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+String sFormato;
+sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+if (!Regex.IsMatch(txtEmail.Text, sFormato))
+{
+  errorProvider1.SetError(txtEmail, "Sumistre una Dirección de Correo válido");
+  txtEmail.Focus();
+  return;
+}
+errorProvider1.SetError(txtEmail, "");
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+decimal Sueldo;
+if(!Decimal.TryParse(txtSueldo.Text, out Sueldo))
+{
+  errorProvider1.SetError(txtSueldo, "Sumistre una cantidad númerica al Sueldo");
+  txtSueldo.Focus();
+  return;
+}
+errorProvider1.SetError(txtSueldo, "");
+
+if (!(Sueldo > 0))
+{
+  errorProvider1.SetError(txtSueldo, "Sumistre una cantidad númerica positiva al Sueldo");
+  txtSueldo.Focus();
+  return;
+}
+errorProvider1.SetError(txtSueldo, "");
